@@ -212,9 +212,9 @@ func findModule(pkgPath string) (string, string) {
 		candidatePath := filepath.Join(gopath, "src", candidate)
 		goModPath := filepath.Join(candidatePath, "go.mod")
 
-		if _, err := os.Stat(goModPath); err == nil {
+		if _, err := os.Stat(goModPath); err == nil { //nolint:gosec // G703: Path derived from CLI package argument
 			// Found go.mod - read the module name
-			content, err := os.ReadFile(goModPath)
+			content, err := os.ReadFile(goModPath) //nolint:gosec // G703: Path derived from CLI package argument
 			if err != nil {
 				continue
 			}

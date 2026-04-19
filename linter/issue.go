@@ -54,9 +54,9 @@ type Issue struct {
 // String returns a human-readable representation of the issue.
 func (i Issue) String() string {
 	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("[%s] %s: %s", i.Severity, i.Path, i.Message))
+	fmt.Fprintf(&sb, "[%s] %s: %s", i.Severity, i.Path, i.Message)
 	if i.Suggestion != "" {
-		sb.WriteString(fmt.Sprintf("\n  suggestion: %s", i.Suggestion))
+		fmt.Fprintf(&sb, "\n  suggestion: %s", i.Suggestion)
 	}
 	return sb.String()
 }
@@ -116,7 +116,7 @@ func (r Result) String() string {
 		sb.WriteString("\n")
 	}
 
-	sb.WriteString(fmt.Sprintf("\nSummary: %d error(s), %d warning(s)\n", errors, warnings))
+	fmt.Fprintf(&sb, "\nSummary: %d error(s), %d warning(s)\n", errors, warnings)
 
 	return sb.String()
 }
@@ -130,8 +130,8 @@ func (r Result) GitHubAnnotations() string {
 		if issue.Severity == SeverityError {
 			level = "error"
 		}
-		sb.WriteString(fmt.Sprintf("::%s file=%s::%s - %s\n",
-			level, r.SchemaPath, issue.Code, issue.Message))
+		fmt.Fprintf(&sb, "::%s file=%s::%s - %s\n",
+			level, r.SchemaPath, issue.Code, issue.Message)
 	}
 	return sb.String()
 }
