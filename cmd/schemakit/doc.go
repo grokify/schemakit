@@ -17,6 +17,7 @@ var (
 	docOutput  string
 	docTitle   string
 	docVersion string
+	docPrepend string
 )
 
 func init() {
@@ -25,6 +26,7 @@ func init() {
 	docCmd.Flags().StringVarP(&docOutput, "output", "o", "", "Output file (default: stdout)")
 	docCmd.Flags().StringVarP(&docTitle, "title", "t", "", "Specification title (default: derived from type name)")
 	docCmd.Flags().StringVarP(&docVersion, "version", "v", "", "Specification version (e.g., v0.4.0)")
+	docCmd.Flags().StringVar(&docPrepend, "prepend", "", "Prepend content from this file (for custom headers/examples)")
 }
 
 var docCmd = &cobra.Command{
@@ -43,13 +45,14 @@ Examples:
   schemakit doc -t "Threat Model Specification" -v v0.4.0 \
     github.com/grokify/threat-model-spec/ir ThreatModel -o spec.md
 
-  # Generate for multi-agent-spec Agent type
-  schemakit doc github.com/plexusone/multi-agent-spec/sdk/go Agent
+  # Generate with custom header prepended
+  schemakit doc --prepend header.md \
+    github.com/grokify/threat-model-spec/ir ThreatModel -o spec.md
 
 Output includes:
   - Type overview with package doc comment
   - Required and optional fields in tables
-  - Enum values for string constants
+  - Enum types with values and descriptions
   - Nested type documentation
   - JSON field names and tags`,
 	Args: cobra.ExactArgs(2),
@@ -93,19 +96,36 @@ type TypeInfo struct {
 	EnumValues  []string    ` + "`json:\"enumValues,omitempty\"`" + `
 }
 
+type EnumValue struct {
+	Name        string ` + "`json:\"name\"`" + `
+	Value       string ` + "`json:\"value\"`" + `
+	Description string ` + "`json:\"description\"`" + `
+}
+
+type EnumInfo struct {
+	Name        string      ` + "`json:\"name\"`" + `
+	Description string      ` + "`json:\"description\"`" + `
+	Values      []EnumValue ` + "`json:\"values\"`" + `
+}
+
 type DocOutput struct {
-	RootType    string     ` + "`json:\"rootType\"`" + `
-	PackageDoc  string     ` + "`json:\"packageDoc\"`" + `
-	Types       []TypeInfo ` + "`json:\"types\"`" + `
+	RootType   string     ` + "`json:\"rootType\"`" + `
+	PackageDoc string     ` + "`json:\"packageDoc\"`" + `
+	Types      []TypeInfo ` + "`json:\"types\"`" + `
+	Enums      []EnumInfo ` + "`json:\"enums\"`" + `
 }
 
 var processedTypes = make(map[string]bool)
 var typeInfos []TypeInfo
+var enumInfos []EnumInfo
 var fieldComments = make(map[string]map[string]string)
+var enumTypes = make(map[string]bool)           // tracks which type names are enums
+var enumValues = make(map[string][]EnumValue)   // type name -> values
+var typeDescriptions = make(map[string]string)  // type name -> description
 
 func main() {
-	// Parse the package for doc comments
-	parsePackageComments()
+	// Parse the package for doc comments, enums, and field comments
+	parsePackage()
 
 	// Start with the root type
 	rootType := reflect.TypeOf(target.{{.Type}}{})
@@ -114,10 +134,20 @@ func main() {
 	// Get package doc
 	pkgDoc := getPackageDoc()
 
+	// Build enum infos from discovered enums
+	for typeName := range enumTypes {
+		enumInfos = append(enumInfos, EnumInfo{
+			Name:        typeName,
+			Description: typeDescriptions[typeName],
+			Values:      enumValues[typeName],
+		})
+	}
+
 	output := DocOutput{
 		RootType:   "{{.Type}}",
 		PackageDoc: pkgDoc,
 		Types:      typeInfos,
+		Enums:      enumInfos,
 	}
 
 	data, err := json.MarshalIndent(output, "", "  ")
@@ -128,8 +158,7 @@ func main() {
 	fmt.Println(string(data))
 }
 
-func parsePackageComments() {
-	// Find the package source directory
+func parsePackage() {
 	gopath := os.Getenv("GOPATH")
 	if gopath == "" {
 		home, _ := os.UserHomeDir()
@@ -145,31 +174,119 @@ func parsePackageComments() {
 
 	for _, pkg := range pkgs {
 		for _, file := range pkg.Files {
-			for _, decl := range file.Decls {
-				genDecl, ok := decl.(*ast.GenDecl)
-				if !ok || genDecl.Tok != token.TYPE {
-					continue
-				}
-				for _, spec := range genDecl.Specs {
-					typeSpec, ok := spec.(*ast.TypeSpec)
-					if !ok {
-						continue
-					}
-					structType, ok := typeSpec.Type.(*ast.StructType)
-					if !ok {
-						continue
-					}
-					typeName := typeSpec.Name.Name
-					if fieldComments[typeName] == nil {
-						fieldComments[typeName] = make(map[string]string)
-					}
-					for _, field := range structType.Fields.List {
-						if field.Doc != nil && len(field.Names) > 0 {
-							fieldComments[typeName][field.Names[0].Name] = strings.TrimSpace(field.Doc.Text())
-						}
-					}
+			parseFile(file)
+		}
+	}
+}
+
+func parseFile(file *ast.File) {
+	// Track type declarations and their comments
+	for _, decl := range file.Decls {
+		genDecl, ok := decl.(*ast.GenDecl)
+		if !ok {
+			continue
+		}
+
+		switch genDecl.Tok {
+		case token.TYPE:
+			parseTypeDecl(genDecl)
+		case token.CONST:
+			parseConstDecl(genDecl)
+		}
+	}
+}
+
+func parseTypeDecl(genDecl *ast.GenDecl) {
+	for _, spec := range genDecl.Specs {
+		typeSpec, ok := spec.(*ast.TypeSpec)
+		if !ok {
+			continue
+		}
+
+		typeName := typeSpec.Name.Name
+
+		// Get type description from doc comment
+		if genDecl.Doc != nil {
+			typeDescriptions[typeName] = strings.TrimSpace(genDecl.Doc.Text())
+		}
+
+		// Check if this is a string type alias (potential enum)
+		if ident, ok := typeSpec.Type.(*ast.Ident); ok {
+			if ident.Name == "string" {
+				enumTypes[typeName] = true
+				enumValues[typeName] = []EnumValue{} // initialize
+			}
+		}
+
+		// Parse struct field comments
+		structType, ok := typeSpec.Type.(*ast.StructType)
+		if !ok {
+			continue
+		}
+
+		if fieldComments[typeName] == nil {
+			fieldComments[typeName] = make(map[string]string)
+		}
+		for _, field := range structType.Fields.List {
+			if field.Doc != nil && len(field.Names) > 0 {
+				fieldComments[typeName][field.Names[0].Name] = strings.TrimSpace(field.Doc.Text())
+			}
+		}
+	}
+}
+
+func parseConstDecl(genDecl *ast.GenDecl) {
+	// Track the current type for iota-style const blocks
+	var currentType string
+
+	for _, spec := range genDecl.Specs {
+		valueSpec, ok := spec.(*ast.ValueSpec)
+		if !ok {
+			continue
+		}
+
+		// Determine the type of this const
+		var constType string
+		if valueSpec.Type != nil {
+			if ident, ok := valueSpec.Type.(*ast.Ident); ok {
+				constType = ident.Name
+				currentType = constType
+			}
+		} else {
+			constType = currentType
+		}
+
+		// Skip if not an enum type we're tracking
+		if !enumTypes[constType] {
+			continue
+		}
+
+		// Extract the const value
+		for i, name := range valueSpec.Names {
+			if !name.IsExported() {
+				continue
+			}
+
+			var value string
+			if i < len(valueSpec.Values) {
+				if lit, ok := valueSpec.Values[i].(*ast.BasicLit); ok {
+					value = strings.Trim(lit.Value, "\"")
 				}
 			}
+
+			// Get description from comment
+			desc := ""
+			if valueSpec.Doc != nil {
+				desc = strings.TrimSpace(valueSpec.Doc.Text())
+			} else if valueSpec.Comment != nil {
+				desc = strings.TrimSpace(valueSpec.Comment.Text())
+			}
+
+			enumValues[constType] = append(enumValues[constType], EnumValue{
+				Name:        name.Name,
+				Value:       value,
+				Description: desc,
+			})
 		}
 	}
 }
@@ -257,7 +374,7 @@ func processType(t reflect.Type) {
 	typeInfos = append(typeInfos, TypeInfo{
 		Name:        typeName,
 		Package:     t.PkgPath(),
-		Description: getTypeComment(typeName),
+		Description: typeDescriptions[typeName],
 		Fields:      fields,
 	})
 }
@@ -296,31 +413,6 @@ func formatType(t reflect.Type) string {
 		}
 		return t.Kind().String()
 	}
-}
-
-func getTypeComment(typeName string) string {
-	gopath := os.Getenv("GOPATH")
-	if gopath == "" {
-		home, _ := os.UserHomeDir()
-		gopath = filepath.Join(home, "go")
-	}
-	pkgDir := filepath.Join(gopath, "src", "{{.Package}}")
-
-	fset := token.NewFileSet()
-	pkgs, err := parser.ParseDir(fset, pkgDir, nil, parser.ParseComments)
-	if err != nil {
-		return ""
-	}
-
-	for _, pkg := range pkgs {
-		d := doc.New(pkg, "{{.Package}}", 0)
-		for _, t := range d.Types {
-			if t.Name == typeName {
-				return strings.TrimSpace(t.Doc)
-			}
-		}
-	}
-	return ""
 }
 `
 
@@ -414,9 +506,18 @@ func runDoc(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to generate markdown: %w", err)
 	}
 
+	// Prepend custom header if specified
+	if docPrepend != "" {
+		header, err := os.ReadFile(docPrepend)
+		if err != nil {
+			return fmt.Errorf("failed to read prepend file: %w", err)
+		}
+		markdown = string(header) + "\n" + markdown
+	}
+
 	// Output result
 	if docOutput != "" {
-		if err := os.WriteFile(docOutput, []byte(markdown), 0600); err != nil {
+		if err := os.WriteFile(docOutput, []byte(markdown), 0600); err != nil { //nolint:gosec // G703: Path from CLI flag
 			return fmt.Errorf("failed to write output file: %w", err)
 		}
 		fmt.Fprintf(cmd.ErrOrStderr(), "Generated %s\n", docOutput)
@@ -445,6 +546,15 @@ func jsonToMarkdown(jsonData []byte, rootType, title, version string) (string, e
 				EnumValues  []string `json:"enumValues,omitempty"`
 			} `json:"fields"`
 		} `json:"types"`
+		Enums []struct {
+			Name        string `json:"name"`
+			Description string `json:"description"`
+			Values      []struct {
+				Name        string `json:"name"`
+				Value       string `json:"value"`
+				Description string `json:"description"`
+			} `json:"values"`
+		} `json:"enums"`
 	}
 
 	if err := json.Unmarshal(jsonData, &data); err != nil {
@@ -468,14 +578,26 @@ func jsonToMarkdown(jsonData []byte, rootType, title, version string) (string, e
 		sb.WriteString(data.PackageDoc + "\n\n")
 	}
 
-	// Table of contents
+	// Table of contents - Types
 	sb.WriteString("## Types\n\n")
 	for _, t := range data.Types {
 		fmt.Fprintf(&sb, "- [%s](#%s)\n", t.Name, strings.ToLower(t.Name))
 	}
 	sb.WriteString("\n")
 
+	// Table of contents - Enums (if any)
+	if len(data.Enums) > 0 {
+		sb.WriteString("## Enums\n\n")
+		for _, e := range data.Enums {
+			fmt.Fprintf(&sb, "- [%s](#%s)\n", e.Name, strings.ToLower(e.Name))
+		}
+		sb.WriteString("\n")
+	}
+
 	// Type documentation
+	sb.WriteString("---\n\n")
+	sb.WriteString("# Type Reference\n\n")
+
 	for _, t := range data.Types {
 		fmt.Fprintf(&sb, "## %s\n\n", t.Name)
 
@@ -539,6 +661,42 @@ func jsonToMarkdown(jsonData []byte, rootType, title, version string) (string, e
 					desc = desc[:97] + "..."
 				}
 				fmt.Fprintf(&sb, "| `%s` | %s | %s |\n", f.JSONName, f.Type, desc)
+			}
+			sb.WriteString("\n")
+		}
+	}
+
+	// Enum documentation
+	if len(data.Enums) > 0 {
+		sb.WriteString("---\n\n")
+		sb.WriteString("# Enum Reference\n\n")
+
+		for _, e := range data.Enums {
+			fmt.Fprintf(&sb, "## %s\n\n", e.Name)
+
+			if e.Description != "" {
+				sb.WriteString(e.Description + "\n\n")
+			}
+
+			if len(e.Values) == 0 {
+				sb.WriteString("*No values defined*\n\n")
+				continue
+			}
+
+			sb.WriteString("| Value | Description |\n")
+			sb.WriteString("|-------|-------------|\n")
+			for _, v := range e.Values {
+				desc := v.Description
+				if desc == "" {
+					desc = "-"
+				}
+				desc = strings.ReplaceAll(desc, "|", "\\|")
+				// Use the actual string value if available, otherwise the const name
+				displayValue := v.Value
+				if displayValue == "" {
+					displayValue = v.Name
+				}
+				fmt.Fprintf(&sb, "| `%s` | %s |\n", displayValue, desc)
 			}
 			sb.WriteString("\n")
 		}
