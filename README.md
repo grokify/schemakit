@@ -82,6 +82,10 @@ schemakit doc github.com/grokify/threat-model-spec/ir ThreatModel
 # Generate with title and version, save to file
 schemakit doc -t "Threat Model Specification" -v v0.4.0 \
   github.com/grokify/threat-model-spec/ir ThreatModel -o spec.md
+
+# Prepend custom header (overview, examples, references)
+schemakit doc --prepend header.md \
+  github.com/grokify/threat-model-spec/ir ThreatModel -o spec.md
 ```
 
 The `doc` command extracts:
@@ -90,7 +94,9 @@ The `doc` command extracts:
 - Type descriptions from doc comments
 - Field names and JSON tags
 - Required vs optional fields (based on `omitempty`)
-- Generates tables for required and optional fields
+- Enum types (`type X string`) and their const values
+- Enum value descriptions from const doc comments
+- Generates Type Reference and Enum Reference sections
 
 ### Lint Schema
 
