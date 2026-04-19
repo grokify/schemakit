@@ -1,0 +1,41 @@
+site_name: SchemaKit
+site_description: JSON Schema toolkit for Go developers
+site_url: https://grokify.github.io/schemakit/
+repo_url: https://github.com/grokify/schemakit
+repo_name: grokify/schemakit
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+
+markdown_extensions:
+  - tables
+  - admonitions
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Commands:
+    - Overview: commands/index.md
+    - lint: commands/lint.md
+    - generate: commands/generate.md
+    - doc: commands/doc.md
+  - Guides:
+    - Spec Documentation: guides/spec-documentation.md
+    - Go-First Workflow: guides/go-first-workflow.md
+  - Reference:
+    - Lint Checks: reference/lint-checks.md
+    - Profiles: reference/profiles.md
+  - Changelog: changelog.md
