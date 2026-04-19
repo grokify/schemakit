@@ -16,7 +16,7 @@ theme:
 
 markdown_extensions:
   - tables
-  - admonitions
+  - admonition
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.tabbed:
