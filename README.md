@@ -244,6 +244,16 @@ See [TASKS.md](TASKS.md) for planned features including:
 - Full `$ref` resolution
 - OpenAPI 3.1 support
 
+## Documentation
+
+Full documentation is available at [grokify.github.io/schemakit](https://grokify.github.io/schemakit/).
+
+Key guides:
+
+- [Spec Documentation Guide](https://grokify.github.io/schemakit/guides/spec-documentation/) - Creating human-audience specs with auto-generation
+- [Go-First Workflow](https://grokify.github.io/schemakit/guides/go-first-workflow/) - Complete workflow guide
+- [Lint Checks Reference](https://grokify.github.io/schemakit/reference/lint-checks/) - All lint check codes
+
 ## References
 
 - [PRD.md](PRD.md) - Product requirements

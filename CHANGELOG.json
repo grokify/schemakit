@@ -10,7 +10,9 @@
       "version": "v0.4.0",
       "date": "2026-04-18",
       "highlights": [
-        {"description": "Rename to schemakit and add doc command for Markdown documentation generation"}
+        {"description": "Rename to schemakit and add doc command for Markdown documentation generation"},
+        {"description": "Enum extraction from Go source with descriptions"},
+        {"description": "MkDocs documentation site with spec documentation guide"}
       ],
       "breaking": [
         {"description": "Rename binary from `schemalint` to `schemakit`", "commit": "299d3d9"},
@@ -20,12 +22,20 @@
         {"description": "`schemakit doc` command to generate Markdown documentation from Go struct types", "commit": "2803436"},
         {"description": "Extract package doc comments, type descriptions, and field comments via reflection", "commit": "2803436"},
         {"description": "Generate required/optional field tables with JSON names and types", "commit": "2803436"},
-        {"description": "Support `--title` and `--version` flags for documentation headers", "commit": "2803436"}
+        {"description": "Support `--title` and `--version` flags for documentation headers", "commit": "2803436"},
+        {"description": "Enum type extraction from `type X string` declarations", "commit": "709ccaf"},
+        {"description": "Enum value extraction from `const` blocks with doc comment descriptions", "commit": "709ccaf"},
+        {"description": "`--prepend` flag to include custom header content (overview, examples, references)", "commit": "709ccaf"},
+        {"description": "Separate Type Reference and Enum Reference sections in generated docs", "commit": "709ccaf"}
       ],
       "documentation": [
+        {"description": "MkDocs site in `docs/` with comprehensive documentation", "commit": "47a2d4d"},
+        {"description": "Spec Documentation Guide explaining auto-gen vs human authoring", "commit": "47a2d4d"},
+        {"description": "Go-First Workflow guide with CI integration examples", "commit": "47a2d4d"},
+        {"description": "Lint checks and profiles reference documentation", "commit": "47a2d4d"},
         {"description": "Update README with schemakit branding and doc command usage", "commit": "c38b257"},
         {"description": "Add Go-first workflow diagram showing generate and doc commands", "commit": "c38b257"},
-        {"description": "Release notes for v0.4.0", "commit": ""}
+        {"description": "Release notes for v0.3.0 and v0.4.0", "commit": "f2fcaa5"}
       ]
     },
     {
