@@ -44,4 +44,20 @@
          <loc>https://grokify.github.io/schemakit/reference/profiles/</loc>
          <lastmod>2026-04-19</lastmod>
     </url>
+    <url>
+         <loc>https://grokify.github.io/schemakit/releases/v0.1.0/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/schemakit/releases/v0.2.0/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/schemakit/releases/v0.3.0/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
+    <url>
+         <loc>https://grokify.github.io/schemakit/releases/v0.4.0/</loc>
+         <lastmod>2026-04-19</lastmod>
+    </url>
 </urlset>
