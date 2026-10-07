@@ -8,3 +8,5 @@ testdata/property_case_pascal_invalid.json
 testdata/property_case_pascal_valid.json
 testdata/property_case_snake_invalid.json
 testdata/property_case_snake_valid.json
+/dist/
+coverage.out
