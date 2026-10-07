@@ -36,10 +36,14 @@ generates Markdown documentation from Go types.
    regenerate `docs/releases/CHANGELOG.md`.
 3. Add `docs/releases/vX.Y.Z.md` and list it in the `mkdocs.yml` nav.
 4. Run `go test ./...`, `golangci-lint run`, and `mkdocs build --strict`.
-5. Check the release build locally:
+5. Check the release build before tagging, either locally with
    `goreleaser release --snapshot --clean --skip=publish,announce,validate`
-   (the archive must contain the binary, README, LICENSE, and CHANGELOG.md).
-6. Push, wait for CI, then tag `vX.Y.Z` and push the tag; the Release
-   workflow runs GoReleaser and attaches the binaries.
-7. Confirm the GitHub release has the platform archives. A release whose
-   workflow failed has notes but no assets.
+   or in CI with `gh workflow run release-dry-run.yaml` (builds every target,
+   uploads `dist/`, and previews the release notes in the job summary). The
+   archive must contain the binary, README, LICENSE, and CHANGELOG.md.
+6. Push, wait for CI, then tag `vX.Y.Z` and push the tag. The Release workflow
+   calls the shared `grokify/.github` Go Release workflow, which runs
+   GoReleaser and sets the release body: a link to `docs/releases/vX.Y.Z.md`
+   on the docs site plus a compare link.
+7. Confirm the GitHub release has the platform archives and `checksums.txt`.
+   The shared workflow fails the run when a release has fewer than two assets.

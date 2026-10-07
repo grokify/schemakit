@@ -1,0 +1,17 @@
+name: Release Dry Run
+
+# Builds and packages every release target without publishing, and previews
+# the release notes in the job summary. Run it from the Actions tab (or
+# `gh workflow run release-dry-run.yaml`) after changing .goreleaser.yaml.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dry-run:
+    uses: grokify/.github/.github/workflows/go-release.yaml@main
+    with:
+      snapshot: true
