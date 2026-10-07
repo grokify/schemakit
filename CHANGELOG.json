@@ -5,6 +5,28 @@
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify"],
+  "unreleased": {
+    "added": [
+      {
+        "description": "`generate --comments` uses Go doc comments from the target package as type and property descriptions",
+        "commit": "64d6bd5"
+      },
+      {
+        "description": "`generate --id`, `--title`, and `--description` set the schema's top-level `$id`, `title`, and `description`",
+        "commit": "64d6bd5"
+      },
+      {
+        "description": "`version` reports the real version from build info for development builds",
+        "commit": "b645a15"
+      }
+    ],
+    "documentation": [
+      {
+        "description": "Document `generate --comments` and the schema metadata flags; correct the example `$id`",
+        "commit": "31023f1"
+      }
+    ]
+  },
   "releases": [
     {
       "version": "v0.5.0",
