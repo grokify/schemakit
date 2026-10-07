@@ -26,18 +26,18 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Installation: installation.md
-  - Commands:
-    - Overview: commands/index.md
-    - lint: commands/lint.md
-    - generate: commands/generate.md
-    - doc: commands/doc.md
   - Guides:
+    - Installation: guides/installation.md
     - Spec Documentation: guides/spec-documentation.md
     - Go-First Workflow: guides/go-first-workflow.md
-  - Reference:
-    - Lint Checks: reference/lint-checks.md
-    - Profiles: reference/profiles.md
+    - Commands:
+      - Overview: guides/commands/index.md
+      - lint: guides/commands/lint.md
+      - generate: guides/commands/generate.md
+      - doc: guides/commands/doc.md
+    - Reference:
+      - Lint Checks: guides/reference/lint-checks.md
+      - Profiles: guides/reference/profiles.md
   - Releases:
     - v0.5.0: releases/v0.5.0.md
     - v0.4.0: releases/v0.4.0.md

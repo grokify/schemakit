@@ -111,5 +111,5 @@ Deployment environment.
 
 ## See Also
 
-- [Spec Documentation Guide](../guides/spec-documentation.md) - Creating human-audience specs
-- [Go-First Workflow](../guides/go-first-workflow.md) - Complete workflow guide
+- [Spec Documentation Guide](../spec-documentation.md) - Creating human-audience specs
+- [Go-First Workflow](../go-first-workflow.md) - Complete workflow guide
