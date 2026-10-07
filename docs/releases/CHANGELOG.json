@@ -5,6 +5,11 @@
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify"],
+  "unreleased": {
+    "infrastructure": [
+      {"description": "Release workflow calls the shared Go Release workflow in `grokify/.github`, which sets a consistent release body and fails a release that has no assets; adds a manually triggered Release Dry Run workflow", "commit": "0f239ee"}
+    ]
+  },
   "releases": [
     {
       "version": "v0.6.0",
