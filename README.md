@@ -34,17 +34,15 @@ JSON Schema toolkit for Go developers.
 
 ## Installation
 
-### Homebrew
-
-```bash
-brew install grokify/tap/schemakit
-```
-
 ### Go Install
 
 ```bash
 go install github.com/grokify/schemakit/cmd/schemakit@latest
 ```
+
+### Release Binaries
+
+Prebuilt archives for Linux, macOS, and Windows (amd64 and arm64) are attached to each [GitHub release](https://github.com/grokify/schemakit/releases), starting with v0.6.0.
 
 ## Commands
 
