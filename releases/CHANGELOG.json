@@ -1,0 +1,164 @@
+{
+  "irVersion": "1.0",
+  "project": "schemakit",
+  "repository": "https://github.com/grokify/schemakit",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": ["grokify"],
+  "releases": [
+    {
+      "version": "v0.6.0",
+      "date": "2026-10-07",
+      "commit": "0a68e83",
+      "highlights": [
+        {"description": "`generate --comments` turns Go doc comments into schema descriptions, and `--id`, `--title`, and `--description` set schema metadata"},
+        {"description": "Release binaries are published again: the GoReleaser configuration is fixed after the schemakit rename, so v0.4.0 and v0.5.0, which published none, are not repeated"},
+        {"description": "User guides moved under `docs/guides/` and the changelog under `docs/releases/`; published documentation URLs change"}
+      ],
+      "added": [
+        {"description": "`generate --comments` uses Go doc comments from the target package as type and property descriptions", "commit": "64d6bd5"},
+        {"description": "`generate --id`, `--title`, and `--description` set the schema's top-level `$id`, `title`, and `description`", "commit": "64d6bd5"},
+        {"description": "`version` reports the real version from build info for development builds", "commit": "b645a15"}
+      ],
+      "changed": [
+        {"description": "User guides, the command reference, and the installation page moved under `docs/guides/`; for example `/commands/generate/` is now `/guides/commands/generate/`", "commit": "f0a1023"},
+        {"description": "`CHANGELOG.json` and `CHANGELOG.md` moved from the repository root to `docs/releases/`, so the changelog is published with the documentation site", "commit": "8d5932c"}
+      ],
+      "fixed": [
+        {"description": "GoReleaser configuration still used the former `schemalint` project, binary, and `./cmd/schemalint` build path, so release builds failed and published no binaries for v0.4.0 and v0.5.0", "commit": "0a68e83"}
+      ],
+      "documentation": [
+        {"description": "Document `generate --comments` and the schema metadata flags; correct the example `$id`", "commit": "31023f1"},
+        {"description": "Remove `brew install grokify/tap/schemakit` from the README and installation guide, which does not work (the tap only has a `schemalint` formula); document `go install` and release archives instead", "commit": "7925c68"}
+      ]
+    },
+    {
+      "version": "v0.5.0",
+      "date": "2026-08-23",
+      "commit": "5084c92",
+      "highlights": [
+        {"description": "Navigable profile for human-reviewable, AI-authored schemas (flat structure, shallow references, ID fields)"},
+        {"description": "`generate --check` drift guard to keep committed schemas in sync with their Go structs in CI"}
+      ],
+      "added": [
+        {"description": "`navigable` lint profile enforcing flat structure and local comprehensibility: `deep-nesting` (error), `deep-array-nesting` (warning), `missing-id-field` (warning)", "commit": "d951be7"},
+        {"description": "`generate --check` flag that regenerates the schema in memory and fails on drift against the committed `-o` file, without rewriting it", "commit": "d7ca541"}
+      ],
+      "documentation": [
+        {"description": "Navigable profile reference and examples", "commit": "742a733"},
+        {"description": "Update README badges/shields", "commit": "639ae95"}
+      ],
+      "tests": [
+        {"description": "Tests for the navigable profile checks", "commit": "b4c5556"}
+      ],
+      "internal": [
+        {"description": "Drop unused `path` parameter from `isArrayOfArraysOfObjects` (unparam)", "commit": "5084c92"},
+        {"description": "`gofmt` formatting fix", "commit": "79aabec"}
+      ],
+      "dependencies": [
+        {"description": "Bump `actions/checkout` from 6 to 7", "commit": "b5b60b0"},
+        {"description": "Bump `actions/setup-go` from 6 to 7", "commit": "26200f5"}
+      ]
+    },
+    {
+      "version": "v0.4.0",
+      "date": "2026-04-18",
+      "highlights": [
+        {"description": "Rename to schemakit and add doc command for Markdown documentation generation"},
+        {"description": "Enum extraction from Go source with descriptions"},
+        {"description": "MkDocs documentation site with spec documentation guide"}
+      ],
+      "breaking": [
+        {"description": "Rename binary from `schemalint` to `schemakit`", "commit": "299d3d9"},
+        {"description": "Rename module from `github.com/grokify/schemalint` to `github.com/grokify/schemakit`", "commit": "299d3d9"}
+      ],
+      "added": [
+        {"description": "`schemakit doc` command to generate Markdown documentation from Go struct types", "commit": "2803436"},
+        {"description": "Extract package doc comments, type descriptions, and field comments via reflection", "commit": "2803436"},
+        {"description": "Generate required/optional field tables with JSON names and types", "commit": "2803436"},
+        {"description": "Support `--title` and `--version` flags for documentation headers", "commit": "2803436"},
+        {"description": "Enum type extraction from `type X string` declarations", "commit": "709ccaf"},
+        {"description": "Enum value extraction from `const` blocks with doc comment descriptions", "commit": "709ccaf"},
+        {"description": "`--prepend` flag to include custom header content (overview, examples, references)", "commit": "709ccaf"},
+        {"description": "Separate Type Reference and Enum Reference sections in generated docs", "commit": "709ccaf"}
+      ],
+      "documentation": [
+        {"description": "MkDocs site in `docs/` with comprehensive documentation", "commit": "47a2d4d"},
+        {"description": "Spec Documentation Guide explaining auto-gen vs human authoring", "commit": "47a2d4d"},
+        {"description": "Go-First Workflow guide with CI integration examples", "commit": "47a2d4d"},
+        {"description": "Lint checks and profiles reference documentation", "commit": "47a2d4d"},
+        {"description": "Update README with schemakit branding and doc command usage", "commit": "c38b257"},
+        {"description": "Add Go-first workflow diagram showing generate and doc commands", "commit": "c38b257"},
+        {"description": "Release notes for v0.3.0 and v0.4.0", "commit": "f2fcaa5"}
+      ]
+    },
+    {
+      "version": "v0.3.0",
+      "date": "2026-02-09",
+      "highlights": [
+        {"description": "Generate JSON Schema from Go struct types using invopop/jsonschema"}
+      ],
+      "added": [
+        {"description": "`schemalint generate` command to generate JSON Schema from Go struct types", "commit": "1148f63"},
+        {"description": "Support for both local (GOPATH/src) and remote Go modules in schema generation", "commit": "1148f63"},
+        {"description": "GitHub Actions release workflow for GoReleaser", "commit": "44a4252"}
+      ],
+      "changed": [
+        {"description": "Rename ROADMAP.json/md to TASKS.json/md", "commit": "1148f63"}
+      ],
+      "fixed": [
+        {"description": "Fix .gitignore pattern to not exclude cmd/schemalint/ files", "commit": "1148f63"}
+      ]
+    },
+    {
+      "version": "v0.2.0",
+      "date": "2026-02-08",
+      "highlights": [
+        {"description": "Rename to schemalint and add scale profile for strict static type compatibility"}
+      ],
+      "breaking": [
+        {"description": "Rename binary from `schemago` to `schemalint`", "commit": "a96efd5"},
+        {"description": "Rename module from `github.com/grokify/schemago` to `github.com/grokify/schemalint`", "commit": "a96efd5"}
+      ],
+      "added": [
+        {"description": "`--profile` / `-p` flag to select linting profile (`default`, `scale`)", "commit": "c0fed40"},
+        {"description": "Scale profile with `composition-disallowed` rule: disallow `anyOf`, `oneOf`, `allOf`", "commit": "c0fed40"},
+        {"description": "Scale profile with `additional-properties-disallowed` rule: disallow `additionalProperties: true`", "commit": "c0fed40"},
+        {"description": "Scale profile with `missing-type` rule: require explicit `type` field", "commit": "c0fed40"},
+        {"description": "Scale profile with `mixed-type-disallowed` rule: disallow type arrays like `[\"string\", \"number\"]`", "commit": "c0fed40"},
+        {"description": "Goreleaser configuration for cross-platform builds and Homebrew tap", "commit": "b5d1fab"},
+        {"description": "`--property-case` flag to enforce property naming conventions (e.g., camelCase, snake_case)", "commit": "73ed44f"}
+      ],
+      "changed": [
+        {"description": "Update CLI description to emphasize static type compatibility for all languages (Go, Rust, TypeScript, etc.)", "commit": "a96efd5"}
+      ],
+      "documentation": [
+        {"description": "README with scale profile docs and Homebrew installation", "commit": "3d4a088"},
+        {"description": "Release notes for v0.2.0", "commit": "3d4a088"},
+        {"description": "PRD, TRD, and ROADMAP updated for schemalint", "commit": "f7e418d"}
+      ]
+    },
+    {
+      "version": "v0.1.0",
+      "date": "2026-01-17",
+      "highlights": [
+        {"description": "Initial release with JSON Schema linter for Go compatibility"}
+      ],
+      "added": [
+        {"description": "CLI with `lint` and `version` commands using cobra", "commit": "f8ed488"},
+        {"description": "JSON Schema parser for linting (supports `$defs`, `definitions`, `anyOf`, `oneOf`)", "commit": "f8ed488"},
+        {"description": "Union detection with discriminator field analysis", "commit": "f8ed488"},
+        {"description": "Nullable pattern detection (`anyOf: [T, null]`)", "commit": "f8ed488"},
+        {"description": "Reference pattern detection (`anyOf: [ComponentReference, BaseXxx]`)", "commit": "f8ed488"},
+        {"description": "Configurable discriminator field priority (`component_type`, `type`, `kind`)", "commit": "f8ed488"},
+        {"description": "Multiple output formats: text (default), JSON, GitHub Actions annotations", "commit": "f8ed488"},
+        {"description": "Exit codes: 0 (ok), 1 (errors), 2 (warnings only)", "commit": "f8ed488"}
+      ],
+      "documentation": [
+        {"description": "Product Requirements Document (PRD.md)", "commit": "b0e491a"},
+        {"description": "Technical Requirements Document (TRD.md)", "commit": "b0e491a"},
+        {"description": "README with installation and usage instructions", "commit": "b0e491a"}
+      ]
+    }
+  ]
+}

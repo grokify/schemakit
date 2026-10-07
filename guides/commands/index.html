@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/schemakit/commands/doc/">
+        <link rel="canonical" href="https://grokify.github.io/schemakit/guides/commands/">
       
       
-        <link rel="prev" href="../generate/">
+        <link rel="prev" href="../go-first-workflow/">
       
       
-        <link rel="next" href="../../guides/spec-documentation/">
+        <link rel="next" href="lint/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>doc - SchemaKit</title>
+        <title>Overview - SchemaKit</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#schemakit-doc" class="md-skip">
+        <a href="#commands" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              doc
+              Overview
             
           </span>
         </div>
@@ -256,33 +256,6 @@
       
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../../installation/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installation
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -301,335 +274,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Commands
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Commands
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lint/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    lint
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../generate/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    generate
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    doc
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    doc
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Flags
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Examples
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-gets-extracted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Gets Extracted
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What Gets Extracted">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#from-struct-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From Struct Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#from-enum-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        From Enum Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Output
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        See Also
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -647,8 +295,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -665,7 +313,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/spec-documentation/" class="md-nav__link">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../spec-documentation/" class="md-nav__link">
         
   
   
@@ -693,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/go-first-workflow/" class="md-nav__link">
+      <a href="../go-first-workflow/" class="md-nav__link">
         
   
   
@@ -714,15 +390,265 @@
 
               
             
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Commands
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#go-first-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Go-First Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schema-first-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema-First Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    lint
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    generate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="doc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    doc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -732,21 +658,18 @@
     
     
       
-        
-        
-      
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
             
   
   
@@ -764,8 +687,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -782,7 +705,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/lint-checks/" class="md-nav__link">
+      <a href="../reference/lint-checks/" class="md-nav__link">
         
   
   
@@ -810,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/profiles/" class="md-nav__link">
+      <a href="../reference/profiles/" class="md-nav__link">
         
   
   
@@ -826,6 +749,14 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -860,10 +791,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -881,8 +812,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -891,6 +822,62 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.6.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.6.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1039,33 +1026,6 @@
   
 
     
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../changelog/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Changelog
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
   </ul>
 </nav>
                   </div>
@@ -1093,55 +1053,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#common-patterns" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Common Patterns
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#flags" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Flags
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Examples
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-gets-extracted" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What Gets Extracted
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="What Gets Extracted">
+    <nav class="md-nav" aria-label="Common Patterns">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#from-struct-types" class="md-nav__link">
+  <a href="#go-first-development" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From Struct Types
+        Go-First Development
       
     </span>
   </a>
@@ -1149,10 +1076,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#from-enum-types" class="md-nav__link">
+  <a href="#schema-first-development" class="md-nav__link">
     <span class="md-ellipsis">
       
-        From Enum Types
+        Schema-First Development
       
     </span>
   </a>
@@ -1161,39 +1088,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#output-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Output Structure
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#example-output" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example Output
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        See Also
-      
-    </span>
-  </a>
   
 </li>
       
@@ -1217,127 +1111,49 @@
   
 
 
-<h1 id="schemakit-doc">schemakit doc<a class="headerlink" href="#schemakit-doc" title="Permanent link">&para;</a></h1>
-<p>Generate Markdown specification documentation from Go struct types.</p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>schemakit<span class="w"> </span>doc<span class="w"> </span>&lt;package&gt;<span class="w"> </span>&lt;type&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
-</code></pre></div>
-<h2 id="flags">Flags<a class="headerlink" href="#flags" title="Permanent link">&para;</a></h2>
+<h1 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h1>
+<p>schemakit provides three main commands:</p>
 <table>
 <thead>
 <tr>
-<th>Flag</th>
+<th>Command</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>-o, --output</code></td>
-<td>Output file (default: stdout)</td>
+<td><a href="lint/"><code>lint</code></a></td>
+<td>Check schemas for static type compatibility</td>
 </tr>
 <tr>
-<td><code>-t, --title</code></td>
-<td>Specification title (default: derived from type name)</td>
+<td><a href="generate/"><code>generate</code></a></td>
+<td>Generate JSON Schema from Go struct types</td>
 </tr>
 <tr>
-<td><code>-v, --version</code></td>
-<td>Specification version (e.g., v0.4.0)</td>
-</tr>
-<tr>
-<td><code>--prepend</code></td>
-<td>Prepend content from this file (for custom headers/examples)</td>
+<td><a href="doc/"><code>doc</code></a></td>
+<td>Generate Markdown documentation from Go types</td>
 </tr>
 </tbody>
 </table>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># Generate to stdout</span>
-schemakit<span class="w"> </span>doc<span class="w"> </span>github.com/grokify/threat-model-spec/ir<span class="w"> </span>ThreatModel
+<h2 id="common-patterns">Common Patterns<a class="headerlink" href="#common-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="go-first-development">Go-First Development<a class="headerlink" href="#go-first-development" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Define types in Go with doc comments</span>
+<span class="c1"># 2. Generate schema</span>
+schemakit<span class="w"> </span>generate<span class="w"> </span>github.com/myorg/myproject/types<span class="w"> </span>Config<span class="w"> </span>-o<span class="w"> </span>schema.json
 
-<span class="c1"># With title and version</span>
-schemakit<span class="w"> </span>doc<span class="w"> </span>-t<span class="w"> </span><span class="s2">&quot;Threat Model Specification&quot;</span><span class="w"> </span>-v<span class="w"> </span>v0.4.0<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>github.com/grokify/threat-model-spec/ir<span class="w"> </span>ThreatModel<span class="w"> </span>-o<span class="w"> </span>spec.md
+<span class="c1"># 3. Generate documentation</span>
+schemakit<span class="w"> </span>doc<span class="w"> </span>github.com/myorg/myproject/types<span class="w"> </span>Config<span class="w"> </span>-o<span class="w"> </span>spec.md
 
-<span class="c1"># With custom header prepended</span>
-schemakit<span class="w"> </span>doc<span class="w"> </span>--prepend<span class="w"> </span>header.md<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>github.com/grokify/threat-model-spec/ir<span class="w"> </span>ThreatModel<span class="w"> </span>-o<span class="w"> </span>spec.md
+<span class="c1"># 4. Validate schema</span>
+schemakit<span class="w"> </span>lint<span class="w"> </span>schema.json
 </code></pre></div>
-<h2 id="what-gets-extracted">What Gets Extracted<a class="headerlink" href="#what-gets-extracted" title="Permanent link">&para;</a></h2>
-<h3 id="from-struct-types">From Struct Types<a class="headerlink" href="#from-struct-types" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Type names and descriptions (from doc comments)</li>
-<li>Field names (Go and JSON)</li>
-<li>Field types</li>
-<li>Required vs optional (based on <code>omitempty</code>)</li>
-<li>Field descriptions (from doc comments)</li>
-</ul>
-<h3 id="from-enum-types">From Enum Types<a class="headerlink" href="#from-enum-types" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Enum type names (<code>type X string</code>)</li>
-<li>Enum values (from <code>const</code> blocks)</li>
-<li>Value descriptions (from const doc comments)</li>
-</ul>
-<h2 id="output-structure">Output Structure<a class="headerlink" href="#output-structure" title="Permanent link">&para;</a></h2>
-<p>The generated Markdown includes:</p>
-<ol>
-<li><strong>Title</strong> - With optional version</li>
-<li><strong>Package Description</strong> - From package doc comment</li>
-<li><strong>Types Table of Contents</strong> - Links to all struct types</li>
-<li><strong>Enums Table of Contents</strong> - Links to all enum types</li>
-<li><strong>Type Reference</strong> - Each type with Required/Optional field tables</li>
-<li><strong>Enum Reference</strong> - Each enum with value tables</li>
-</ol>
-<h2 id="example-output">Example Output<a class="headerlink" href="#example-output" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="gh"># MySpec Specification v1.0.0</span>
+<h3 id="schema-first-development">Schema-First Development<a class="headerlink" href="#schema-first-development" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Write or receive a JSON Schema</span>
+<span class="c1"># 2. Lint before code generation</span>
+schemakit<span class="w"> </span>lint<span class="w"> </span>schema.json<span class="w"> </span>--profile<span class="w"> </span>scale
 
-Package myspec provides types for...
-
-<span class="gu">## Types</span>
-
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Config</span>](<span class="na">#config</span>)
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Database</span>](<span class="na">#database</span>)
-
-<span class="gu">## Enums</span>
-
-<span class="k">-</span><span class="w"> </span>[<span class="nt">Environment</span>](<span class="na">#environment</span>)
-
----
-
-<span class="gh"># Type Reference</span>
-
-<span class="gu">## Config</span>
-
-Configuration for the application.
-
-<span class="gu">### Required Fields</span>
-
-| Field | Type | Description |
-|-------|------|-------------|
-| <span class="sb">`name`</span> | string | Application name |
-
-<span class="gu">### Optional Fields</span>
-
-| Field | Type | Description |
-|-------|------|-------------|
-| <span class="sb">`debug`</span> | bool | Enable debug mode |
-
----
-
-<span class="gh"># Enum Reference</span>
-
-<span class="gu">## Environment</span>
-
-Deployment environment.
-
-| Value | Description |
-|-------|-------------|
-| <span class="sb">`dev`</span> | Development environment |
-| <span class="sb">`prod`</span> | Production environment |
+<span class="c1"># 3. Generate code (using external tools)</span>
 </code></pre></div>
-<h2 id="see-also">See Also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="../../guides/spec-documentation/">Spec Documentation Guide</a> - Creating human-audience specs</li>
-<li><a href="../../guides/go-first-workflow/">Go-First Workflow</a> - Complete workflow guide</li>
-</ul>
 
 
 

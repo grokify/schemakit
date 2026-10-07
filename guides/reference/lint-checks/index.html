@@ -10,29 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://grokify.github.io/schemakit/releases/v0.1.0/">
+        <link rel="canonical" href="https://grokify.github.io/schemakit/guides/reference/lint-checks/">
       
       
-        <link rel="prev" href="../v0.2.0/">
+        <link rel="prev" href="../../commands/doc/">
       
+      
+        <link rel="next" href="../profiles/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>v0.1.0 - SchemaKit</title>
+        <title>Lint Checks - SchemaKit</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#release-notes-schemago-v010" class="md-skip">
+        <a href="#lint-checks-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="SchemaKit" class="md-header__button md-logo" aria-label="SchemaKit" data-md-component="logo">
+    <a href="../../.." title="SchemaKit" class="md-header__button md-logo" aria-label="SchemaKit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              v0.1.0
+              Lint Checks
             
           </span>
         </div>
@@ -200,7 +202,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="SchemaKit" class="md-nav__button md-logo" aria-label="SchemaKit" data-md-component="logo">
+    <a href="../../.." title="SchemaKit" class="md-nav__button md-logo" aria-label="SchemaKit" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -230,7 +232,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -254,8 +256,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -266,13 +270,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -293,7 +295,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -311,7 +313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -339,7 +341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/spec-documentation/" class="md-nav__link">
+      <a href="../../spec-documentation/" class="md-nav__link">
         
   
   
@@ -367,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/go-first-workflow/" class="md-nav__link">
+      <a href="../../go-first-workflow/" class="md-nav__link">
         
   
   
@@ -446,7 +448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/commands/" class="md-nav__link">
+      <a href="../../commands/" class="md-nav__link">
         
   
   
@@ -474,7 +476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/commands/lint/" class="md-nav__link">
+      <a href="../../commands/lint/" class="md-nav__link">
         
   
   
@@ -502,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/commands/generate/" class="md-nav__link">
+      <a href="../../commands/generate/" class="md-nav__link">
         
   
   
@@ -530,7 +532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/commands/doc/" class="md-nav__link">
+      <a href="../../commands/doc/" class="md-nav__link">
         
   
   
@@ -563,6 +565,8 @@
                 
   
   
+    
+  
   
   
     
@@ -572,13 +576,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
         
           
           <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
@@ -599,7 +601,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -614,10 +616,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../guides/reference/lint-checks/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lint Checks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -633,6 +662,148 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#default-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Profile
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Default Profile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warnings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Warnings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scale-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scale Profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigable-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Navigable Profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union-no-discriminator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        union-no-discriminator
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-property-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        invalid-property-case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-disallowed-scale-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        composition-disallowed (Scale Profile)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#property-case-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property Case Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -645,7 +816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../guides/reference/profiles/" class="md-nav__link">
+      <a href="../profiles/" class="md-nav__link">
         
   
   
@@ -685,8 +856,6 @@
       
   
   
-    
-  
   
   
     
@@ -699,11 +868,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
@@ -724,7 +895,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -742,7 +913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../CHANGELOG/" class="md-nav__link">
+      <a href="../../../releases/CHANGELOG/" class="md-nav__link">
         
   
   
@@ -770,7 +941,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.6.0/" class="md-nav__link">
+      <a href="../../../releases/v0.6.0/" class="md-nav__link">
         
   
   
@@ -798,7 +969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.5.0/" class="md-nav__link">
+      <a href="../../../releases/v0.5.0/" class="md-nav__link">
         
   
   
@@ -826,7 +997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.4.0/" class="md-nav__link">
+      <a href="../../../releases/v0.4.0/" class="md-nav__link">
         
   
   
@@ -854,7 +1025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.3.0/" class="md-nav__link">
+      <a href="../../../releases/v0.3.0/" class="md-nav__link">
         
   
   
@@ -882,7 +1053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../v0.2.0/" class="md-nav__link">
+      <a href="../../../releases/v0.2.0/" class="md-nav__link">
         
   
   
@@ -907,37 +1078,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    v0.1.0
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.1.0/" class="md-nav__link">
         
   
   
@@ -953,153 +1097,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#highlights" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Highlights
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick Start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lint-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lint Checks
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Lint Checks">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#errors" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Errors
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#warnings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Warnings
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exit-codes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exit Codes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What's Next
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Documentation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        License
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1139,59 +1136,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#default-profile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        Default Profile
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#highlights" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Highlights
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick Start
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#lint-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lint Checks
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Lint Checks">
+    <nav class="md-nav" aria-label="Default Profile">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1222,10 +1175,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#exit-codes" class="md-nav__link">
+  <a href="#scale-profile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exit Codes
+        Scale Profile
       
     </span>
   </a>
@@ -1233,10 +1186,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#navigable-profile" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's Next
+        Navigable Profile
       
     </span>
   </a>
@@ -1244,21 +1197,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#documentation" class="md-nav__link">
+  <a href="#examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentation
+        Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#union-no-discriminator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        union-no-discriminator
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#invalid-property-case" class="md-nav__link">
     <span class="md-ellipsis">
       
-        License
+        invalid-property-case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#composition-disallowed-scale-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        composition-disallowed (Scale Profile)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#property-case-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property Case Conventions
       
     </span>
   </a>
@@ -1285,121 +1277,244 @@
   
 
 
-<h1 id="release-notes-schemago-v010">Release Notes: schemago v0.1.0<a class="headerlink" href="#release-notes-schemago-v010" title="Permanent link">&para;</a></h1>
-<p><strong>Release Date:</strong> 2026-01-17</p>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>This is the initial release of <strong>schemago</strong>, a JSON Schema to Go code generator with first-class union type support. This release focuses on the schema linting functionality, which validates JSON Schemas for Go compatibility issues before code generation.</p>
-<h2 id="highlights">Highlights<a class="headerlink" href="#highlights" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Schema Linter</strong>: Detect union patterns that cause problems in Go code generation</li>
-<li><strong>Smart Pattern Detection</strong>: Correctly identifies nullable, reference, and polymorphic union patterns</li>
-<li><strong>Multiple Output Formats</strong>: Text, JSON, and GitHub Actions annotations</li>
-<li><strong>Configurable</strong>: Customizable discriminator field priority and thresholds</li>
-</ul>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>go<span class="w"> </span>install<span class="w"> </span>github.com/grokify/schemago/cmd/schemago@v0.1.0
-</code></pre></div>
-<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># Lint a JSON Schema file</span>
-schemago<span class="w"> </span>lint<span class="w"> </span>schema.json
-
-<span class="c1"># Output as JSON</span>
-schemago<span class="w"> </span>lint<span class="w"> </span>--output<span class="w"> </span>json<span class="w"> </span>schema.json
-
-<span class="c1"># Output as GitHub Actions annotations</span>
-schemago<span class="w"> </span>lint<span class="w"> </span>--output<span class="w"> </span>github<span class="w"> </span>schema.json
-</code></pre></div>
-<h2 id="lint-checks">Lint Checks<a class="headerlink" href="#lint-checks" title="Permanent link">&para;</a></h2>
+<h1 id="lint-checks-reference">Lint Checks Reference<a class="headerlink" href="#lint-checks-reference" title="Permanent link">&para;</a></h1>
+<p>Complete reference of all lint checks performed by <code>schemakit lint</code>.</p>
+<h2 id="default-profile">Default Profile<a class="headerlink" href="#default-profile" title="Permanent link">&para;</a></h2>
 <h3 id="errors">Errors<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h3>
+<p>Errors indicate patterns that will cause problems in generated code.</p>
 <table>
 <thead>
 <tr>
 <th>Code</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>union-no-discriminator</code></td>
+<td>Missing Discriminator</td>
 <td>Union (<code>anyOf</code>/<code>oneOf</code>) has no discriminator field</td>
 </tr>
 <tr>
 <td><code>inconsistent-discriminator</code></td>
+<td>Inconsistent Discriminator</td>
 <td>Variants use different discriminator field names</td>
 </tr>
 <tr>
 <td><code>missing-const</code></td>
+<td>Missing Const</td>
 <td>Union variant lacks <code>const</code> value for discriminator</td>
 </tr>
 <tr>
 <td><code>duplicate-const-value</code></td>
+<td>Duplicate Const</td>
 <td>Multiple variants have the same discriminator value</td>
+</tr>
+<tr>
+<td><code>invalid-property-case</code></td>
+<td>Invalid Property Case</td>
+<td>Property name does not follow the configured case convention</td>
 </tr>
 </tbody>
 </table>
 <h3 id="warnings">Warnings<a class="headerlink" href="#warnings" title="Permanent link">&para;</a></h3>
+<p>Warnings indicate patterns that may cause issues or are suboptimal.</p>
 <table>
 <thead>
 <tr>
 <th>Code</th>
+<th>Name</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>large-union</code></td>
+<td>Large Union</td>
 <td>Union has more than 10 variants</td>
 </tr>
 <tr>
 <td><code>nested-union</code></td>
+<td>Nested Union</td>
 <td>Union nested more than 2 levels deep</td>
 </tr>
 <tr>
 <td><code>additional-properties</code></td>
+<td>Additional Properties</td>
 <td>Union variant has <code>additionalProperties: true</code></td>
+</tr>
+<tr>
+<td><code>ambiguous-union</code></td>
+<td>Ambiguous Union</td>
+<td>Union variants cannot be distinguished</td>
+</tr>
+<tr>
+<td><code>circular-reference</code></td>
+<td>Circular Reference</td>
+<td>Schema contains circular <code>$ref</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="exit-codes">Exit Codes<a class="headerlink" href="#exit-codes" title="Permanent link">&para;</a></h2>
+<h2 id="scale-profile">Scale Profile<a class="headerlink" href="#scale-profile" title="Permanent link">&para;</a></h2>
+<p>The scale profile includes all default checks plus these additional errors:</p>
 <table>
 <thead>
 <tr>
 <th>Code</th>
-<th>Meaning</th>
+<th>Name</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>0</td>
-<td>No issues found</td>
+<td><code>composition-disallowed</code></td>
+<td>Composition Disallowed</td>
+<td>Disallow <code>anyOf</code>, <code>oneOf</code>, <code>allOf</code></td>
 </tr>
 <tr>
-<td>1</td>
-<td>Errors found (schema has problems)</td>
+<td><code>additional-properties-disallowed</code></td>
+<td>Additional Props Disallowed</td>
+<td>Disallow <code>additionalProperties: true</code></td>
 </tr>
 <tr>
-<td>2</td>
-<td>Warnings found but no errors</td>
+<td><code>missing-type</code></td>
+<td>Missing Type</td>
+<td>Require explicit <code>type</code> field</td>
+</tr>
+<tr>
+<td><code>mixed-type-disallowed</code></td>
+<td>Mixed Type Disallowed</td>
+<td>Disallow type arrays like <code>["string", "number"]</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="whats-next">What's Next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
-<p>Future releases will add:</p>
-<ul>
-<li><code>schemago generate</code> - Generate Go code from validated schemas</li>
-<li>Full <code>$ref</code> resolution including circular references</li>
-<li>Configuration file support (<code>schemago.yaml</code>)</li>
-<li>Oracle Agent Spec compatibility</li>
-</ul>
-<p>See <a href="https://github.com/grokify/schemakit/blob/main/TASKS.md">TASKS.md</a> for planned features.</p>
-<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://github.com/grokify/schemakit/blob/main/README.md">README.md</a> - Quick start guide</li>
-<li><a href="https://github.com/grokify/schemakit/blob/main/PRD.md">PRD.md</a> - Product requirements</li>
-<li><a href="https://github.com/grokify/schemakit/blob/main/TRD.md">TRD.md</a> - Technical requirements</li>
-</ul>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<p>MIT License</p>
+<h2 id="navigable-profile">Navigable Profile<a class="headerlink" href="#navigable-profile" title="Permanent link">&para;</a></h2>
+<p>The navigable profile enforces flat, locally-comprehensible schemas for human
+review and AI authoring. See <a href="../profiles/#navigable-profile">Profiles</a> for the
+full rationale.</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Name</th>
+<th>Severity</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>deep-nesting</code></td>
+<td>Deep Nesting</td>
+<td>Error</td>
+<td>Object nesting exceeds 2 levels</td>
+</tr>
+<tr>
+<td><code>deep-array-nesting</code></td>
+<td>Deep Array Nesting</td>
+<td>Warning</td>
+<td>Arrays of arrays of objects reduce navigability</td>
+</tr>
+<tr>
+<td><code>missing-id-field</code></td>
+<td>Missing ID Field</td>
+<td>Warning</td>
+<td>Array items lack an ID field for cross-referencing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
+<h3 id="union-no-discriminator">union-no-discriminator<a class="headerlink" href="#union-no-discriminator" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}}},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}}}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Fix:</strong> Add a discriminator field with <code>const</code> values:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;const&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;const&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="invalid-property-case">invalid-property-case<a class="headerlink" href="#invalid-property-case" title="Permanent link">&para;</a></h3>
+<p><strong>Problem (with <code>--property-case camelCase</code>):</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;user_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Fix:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="composition-disallowed-scale-profile">composition-disallowed (Scale Profile)<a class="headerlink" href="#composition-disallowed-scale-profile" title="Permanent link">&para;</a></h3>
+<p><strong>Problem:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;allOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Base&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;$ref&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#/$defs/Extended&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>Fix:</strong> Flatten into a single object type or use explicit typing.</p>
+<h2 id="property-case-conventions">Property Case Conventions<a class="headerlink" href="#property-case-conventions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Convention</th>
+<th>Pattern</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td>No validation</td>
+<td>Any case allowed</td>
+</tr>
+<tr>
+<td><code>camelCase</code></td>
+<td>lowerCamelCase</td>
+<td><code>userName</code>, <code>createdAt</code></td>
+</tr>
+<tr>
+<td><code>snake_case</code></td>
+<td>lower_snake_case</td>
+<td><code>user_name</code>, <code>created_at</code></td>
+</tr>
+<tr>
+<td><code>kebab-case</code></td>
+<td>lower-kebab-case</td>
+<td><code>user-name</code>, <code>created-at</code></td>
+</tr>
+<tr>
+<td><code>PascalCase</code></td>
+<td>UpperCamelCase</td>
+<td><code>UserName</code>, <code>CreatedAt</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1449,10 +1564,10 @@ schemago<span class="w"> </span>lint<span class="w"> </span>--output<span class=
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
