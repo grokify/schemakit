@@ -5,29 +5,33 @@
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["grokify"],
-  "unreleased": {
-    "added": [
-      {
-        "description": "`generate --comments` uses Go doc comments from the target package as type and property descriptions",
-        "commit": "64d6bd5"
-      },
-      {
-        "description": "`generate --id`, `--title`, and `--description` set the schema's top-level `$id`, `title`, and `description`",
-        "commit": "64d6bd5"
-      },
-      {
-        "description": "`version` reports the real version from build info for development builds",
-        "commit": "b645a15"
-      }
-    ],
-    "documentation": [
-      {
-        "description": "Document `generate --comments` and the schema metadata flags; correct the example `$id`",
-        "commit": "31023f1"
-      }
-    ]
-  },
   "releases": [
+    {
+      "version": "v0.6.0",
+      "date": "2026-10-07",
+      "commit": "0a68e83",
+      "highlights": [
+        {"description": "`generate --comments` turns Go doc comments into schema descriptions, and `--id`, `--title`, and `--description` set schema metadata"},
+        {"description": "Release binaries are published again: the GoReleaser configuration is fixed after the schemakit rename, so v0.4.0 and v0.5.0, which published none, are not repeated"},
+        {"description": "User guides moved under `docs/guides/` and the changelog under `docs/releases/`; published documentation URLs change"}
+      ],
+      "added": [
+        {"description": "`generate --comments` uses Go doc comments from the target package as type and property descriptions", "commit": "64d6bd5"},
+        {"description": "`generate --id`, `--title`, and `--description` set the schema's top-level `$id`, `title`, and `description`", "commit": "64d6bd5"},
+        {"description": "`version` reports the real version from build info for development builds", "commit": "b645a15"}
+      ],
+      "changed": [
+        {"description": "User guides, the command reference, and the installation page moved under `docs/guides/`; for example `/commands/generate/` is now `/guides/commands/generate/`", "commit": "f0a1023"},
+        {"description": "`CHANGELOG.json` and `CHANGELOG.md` moved from the repository root to `docs/releases/`, so the changelog is published with the documentation site", "commit": "8d5932c"}
+      ],
+      "fixed": [
+        {"description": "GoReleaser configuration still used the former `schemalint` project, binary, and `./cmd/schemalint` build path, so release builds failed and published no binaries for v0.4.0 and v0.5.0", "commit": "0a68e83"}
+      ],
+      "documentation": [
+        {"description": "Document `generate --comments` and the schema metadata flags; correct the example `$id`", "commit": "31023f1"},
+        {"description": "Remove `brew install grokify/tap/schemakit` from the README and installation guide, which does not work (the tap only has a `schemalint` formula); document `go install` and release archives instead", "commit": "7925c68"}
+      ]
+    },
     {
       "version": "v0.5.0",
       "date": "2026-08-23",
