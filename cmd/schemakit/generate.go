@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -13,9 +14,13 @@ import (
 )
 
 var (
-	genOutput string
-	genIndent bool
-	genCheck  bool
+	genOutput      string
+	genIndent      bool
+	genCheck       bool
+	genComments    bool
+	genID          string
+	genTitle       string
+	genDescription string
 )
 
 func init() {
@@ -24,6 +29,10 @@ func init() {
 	generateCmd.Flags().StringVarP(&genOutput, "output", "o", "", "Output file (default: stdout)")
 	generateCmd.Flags().BoolVar(&genIndent, "indent", true, "Indent JSON output")
 	generateCmd.Flags().BoolVar(&genCheck, "check", false, "Verify the committed -o file matches freshly generated output; exit non-zero on drift (no write)")
+	generateCmd.Flags().BoolVar(&genComments, "comments", false, "Use Go doc comments from the package (and its subdirectories) as property and type descriptions")
+	generateCmd.Flags().StringVar(&genID, "id", "", "Set the schema's $id (default: derived from the package path and type)")
+	generateCmd.Flags().StringVar(&genTitle, "title", "", "Set the schema's title")
+	generateCmd.Flags().StringVar(&genDescription, "description", "", "Set the schema's description")
 }
 
 var generateCmd = &cobra.Command{
@@ -47,13 +56,47 @@ Examples:
   # Fail if the committed schema is out of sync with the Go structs (CI drift guard)
   schemakit generate -o schema.json --check github.com/myorg/myproject/types Config
 
+  # Document properties from Go doc comments and set schema metadata
+  schemakit generate --comments \
+    --id https://example.com/schemas/config.schema.json \
+    --title "Config" --description "Application configuration." \
+    -o schema.json github.com/myorg/myproject/types Config
+
 Notes:
   - The package must be importable (available locally or via go get)
   - The type must be exported (start with uppercase)
   - Uses struct tags: json, jsonschema, title, description, etc.
+  - --comments reads Go doc comments from the target package's directory
+    and below, so types from other packages are not described. Type
+    comments contribute their first sentence; field comments in full. A
+    On fields, a jsonschema description tag takes precedence over a
+    comment. Every .go
+    file under that directory is parsed, so a syntactically invalid file
+    (for example in testdata) makes generation fail.
   - --check requires -o and does not modify the file; it exits 1 on drift`,
 	Args: cobra.ExactArgs(2),
 	RunE: runGenerate,
+}
+
+// genProgram holds the values rendered into the temporary generator program.
+// String fields are Go-quoted by the template, so arbitrary CLI input cannot
+// alter the program's structure.
+type genProgram struct {
+	Package string
+	Type    string
+	Indent  bool
+
+	// Comments enables Go doc comment extraction. ModDir is the directory of
+	// the target module, ModName its import path, and RelPkgDir the target
+	// package's directory relative to ModDir ("." for the module root).
+	Comments  bool
+	ModDir    string
+	ModName   string
+	RelPkgDir string
+
+	ID          string
+	Title       string
+	Description string
 }
 
 const genTemplate = `//go:build ignore
@@ -74,7 +117,28 @@ func main() {
 		DoNotReference: false,
 		ExpandedStruct: false,
 	}
+{{- if .Comments}}
+	// invopop keys comments by the base import path joined with the directory
+	// as given, so the directory must be relative to the module root.
+	if err := os.Chdir({{quote .ModDir}}); err != nil {
+		fmt.Fprintf(os.Stderr, "error entering module directory: %v\n", err)
+		os.Exit(1)
+	}
+	if err := r.AddGoComments({{quote .ModName}}, {{quote .RelPkgDir}}); err != nil {
+		fmt.Fprintf(os.Stderr, "error reading Go comments: %v\n", err)
+		os.Exit(1)
+	}
+{{- end}}
 	schema := r.Reflect(&target.{{.Type}}{})
+{{- if .ID}}
+	schema.ID = jsonschema.ID({{quote .ID}})
+{{- end}}
+{{- if .Title}}
+	schema.Title = {{quote .Title}}
+{{- end}}
+{{- if .Description}}
+	schema.Description = {{quote .Description}}
+{{- end}}
 	{{if .Indent}}
 	data, err := json.MarshalIndent(schema, "", "  ")
 	{{else}}
@@ -87,6 +151,32 @@ func main() {
 	fmt.Println(string(data))
 }
 `
+
+var genTmpl = template.Must(template.New("gen").
+	Funcs(template.FuncMap{"quote": strconv.Quote}).
+	Parse(genTemplate))
+
+// renderProgram renders the temporary generator program's source.
+func renderProgram(p genProgram) ([]byte, error) {
+	var buf bytes.Buffer
+	if err := genTmpl.Execute(&buf, p); err != nil {
+		return nil, fmt.Errorf("failed to execute template: %w", err)
+	}
+	return buf.Bytes(), nil
+}
+
+// relPackageDir returns the directory of pkgPath relative to its module root
+// ("." for the root package), given the module's import path.
+func relPackageDir(pkgPath, modName string) (string, error) {
+	if pkgPath == modName {
+		return ".", nil
+	}
+	rest, ok := strings.CutPrefix(pkgPath, modName+"/")
+	if !ok {
+		return "", fmt.Errorf("package %s is not inside module %s", pkgPath, modName)
+	}
+	return "./" + rest, nil
+}
 
 func runGenerate(cmd *cobra.Command, args []string) error {
 	pkgPath := args[0]
@@ -112,27 +202,26 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	}
 	defer os.RemoveAll(tmpDir)
 
-	// Generate the temporary program
-	tmpl, err := template.New("gen").Parse(genTemplate)
-	if err != nil {
-		return fmt.Errorf("failed to parse template: %w", err)
+	prog := genProgram{
+		Package:     pkgPath,
+		Type:        typeName,
+		Indent:      genIndent,
+		Comments:    genComments,
+		ModName:     modName,
+		ID:          genID,
+		Title:       genTitle,
+		Description: genDescription,
 	}
-
-	var buf bytes.Buffer
-	err = tmpl.Execute(&buf, map[string]any{
-		"Package": pkgPath,
-		"Type":    typeName,
-		"Indent":  genIndent,
-	})
-	if err != nil {
-		return fmt.Errorf("failed to execute template: %w", err)
+	if genComments {
+		rel, err := relPackageDir(pkgPath, modName)
+		if err != nil {
+			return err
+		}
+		prog.RelPkgDir = rel
 	}
-
-	// Write the temporary program
+	// The program is written after the module is fetched, because --comments
+	// needs the module's directory, which is only known once it resolves.
 	genFile := filepath.Join(tmpDir, "gen.go")
-	if err := os.WriteFile(genFile, buf.Bytes(), 0600); err != nil {
-		return fmt.Errorf("failed to write temp file: %w", err)
-	}
 
 	// Helper function to run go commands and check for errors
 	goCmd := func(args ...string) error {
@@ -177,6 +266,27 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	// Note: We skip `go mod tidy` because gen.go has //go:build ignore
 	// which causes tidy to remove all requires since it sees no imports.
 
+	if genComments {
+		// Resolve the module directory (the local replace target, or the
+		// module cache for a remote module) so comments can be read from source.
+		dirOut, err := goCmdOutput(tmpDir, "list", "-m", "-f", "{{.Dir}}", modName)
+		if err != nil {
+			return err
+		}
+		prog.ModDir = strings.TrimSpace(dirOut)
+		if prog.ModDir == "" {
+			return fmt.Errorf("could not locate source for module %s; --comments needs the module's source", modName)
+		}
+	}
+
+	src, err := renderProgram(prog)
+	if err != nil {
+		return err
+	}
+	if err := os.WriteFile(genFile, src, 0600); err != nil {
+		return fmt.Errorf("failed to write temp file: %w", err)
+	}
+
 	// Run the generator
 	genCmd := exec.Command("go", "run", "gen.go")
 	genCmd.Dir = tmpDir
@@ -207,6 +317,19 @@ func runGenerate(cmd *cobra.Command, args []string) error {
 	}
 
 	return nil
+}
+
+// goCmdOutput runs a go command in dir and returns its stdout.
+func goCmdOutput(dir string, args ...string) (string, error) {
+	c := exec.Command("go", args...)
+	c.Dir = dir
+	c.Env = append(os.Environ(), "GO111MODULE=on")
+	var stdout, stderr bytes.Buffer
+	c.Stdout, c.Stderr = &stdout, &stderr
+	if err := c.Run(); err != nil {
+		return "", fmt.Errorf("go %v failed: %w\n%s", args, err, stderr.String())
+	}
+	return stdout.String(), nil
 }
 
 // checkSchemaDrift compares freshly generated schema output against the
