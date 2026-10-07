@@ -45,7 +45,8 @@ archives:
     files:
       - README.md
       - LICENSE
-      - CHANGELOG.md
+      - src: docs/releases/CHANGELOG.md
+        strip_parent: true
 
 checksum:
   name_template: "checksums.txt"

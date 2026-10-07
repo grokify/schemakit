@@ -252,7 +252,7 @@ go install github.com/grokify/schemalint/cmd/schemalint@latest
 
 ### 7.3 Release Process
 
-1. Update CHANGELOG.json and regenerate CHANGELOG.md
+1. Update docs/releases/CHANGELOG.json and regenerate docs/releases/CHANGELOG.md
 2. Commit and push to main
 3. Wait for CI to pass
 4. Create and push tag: `git tag v0.x.0 && git push origin v0.x.0`
