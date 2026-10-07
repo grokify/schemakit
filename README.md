@@ -67,9 +67,15 @@ schemakit generate -o schema.json github.com/myorg/myproject/types Config
 
 # CI drift guard: fail if the committed schema is out of sync with the Go structs
 schemakit generate -o schema.json --check github.com/myorg/myproject/types Config
+
+# Descriptions from Go doc comments, plus schema metadata
+schemakit generate --comments --id https://example.com/config.schema.json \
+  --title "Config" -o schema.json github.com/myorg/myproject/types Config
 ```
 
 This creates a temporary Go program that uses [invopop/jsonschema](https://github.com/invopop/jsonschema) to reflect on your type and generate the schema. The target package can be local (in GOPATH/src) or remote.
+
+Use `--comments` to turn Go doc comments into property and type descriptions, and `--id`, `--title`, and `--description` to set schema metadata.
 
 Use `--check` (requires `-o`) to verify that a committed schema still matches its Go structs without rewriting it — it exits non-zero on drift. Pair it with a `//go:generate schemakit generate ...` directive so `go generate ./...` refreshes the schema and CI catches drift.
 

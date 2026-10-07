@@ -15,6 +15,10 @@ schemakit generate <package> <type> [flags]
 | `-o, --output` | Output file (default: stdout) |
 | `--indent` | Indent JSON output (default: true) |
 | `--check` | Verify the committed `-o` file matches freshly generated output; exit non-zero on drift (no write). Requires `-o`. |
+| `--comments` | Use Go doc comments from the target package (and its subdirectories) as property and type descriptions. |
+| `--id` | Set the schema's `$id` (default: the package path plus the lower-cased type name). |
+| `--title` | Set the schema's `title`. |
+| `--description` | Set the schema's `description`. |
 
 ## Examples
 
@@ -30,7 +34,45 @@ schemakit generate --indent=false github.com/myorg/myproject/types Config
 
 # CI drift guard: fail if the committed schema is out of sync with the Go structs
 schemakit generate -o schema.json --check github.com/myorg/myproject/types Config
+
+# Document properties from Go doc comments and set schema metadata
+schemakit generate --comments \
+  --id https://example.com/schemas/config.schema.json \
+  --title "Config" --description "Application configuration." \
+  -o schema.json github.com/myorg/myproject/types Config
 ```
+
+## Descriptions from Go Comments (`--comments`)
+
+With `--comments`, Go doc comments become `description` fields, so the Go
+source stays the single place where the contract is documented:
+
+```go
+// Config configures the service.
+type Config struct {
+	// Host is the database host name.
+	Host string `json:"host"`
+}
+```
+
+- A **type** comment contributes its first sentence; a **field** comment
+  contributes its full text.
+- On a field, a `jsonschema:"description=X"` tag takes precedence over the
+  comment.
+- Comments are read from the target package's directory and below. Types
+  from other packages are reflected but get no descriptions.
+- Every `.go` file under that directory is parsed, so a syntactically
+  invalid file (for example one under `testdata`) makes generation fail.
+- Comments are read from source, so the module must be available locally
+  (under `$GOPATH/src`) or in the module cache.
+
+## Schema Metadata (`--id`, `--title`, `--description`)
+
+These flags set the corresponding top-level keywords on the generated
+schema. Values are quoted before they are placed in the generated program,
+so quotes, newlines, and backslashes are safe. Use `--id` when the schema
+is published at a stable URL, such as a raw repository file, rather than
+the default derived from the package path.
 
 ## Drift Guard (`--check`)
 
@@ -82,7 +124,7 @@ The generated schema respects these struct tags:
 ```json
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "config",
+  "$id": "https://github.com/myorg/myproject/types/config",
   "$defs": {
     "Database": {
       "type": "object",
